@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Now at {{ .SpaceName }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+body {
+  margin: 5% auto;
+  background: #f8f8f8;
+  color: #222;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  text-shadow: 0 1px 0 #ffffff;
+  max-width: 73%;
+}
+
+code {
+  background: white;
+}
+
+a {
+  border-bottom: 1px solid #222;
+  color: #222;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 0;
+}
+
+table.devices, .devices td, .devices th {
+  padding: .5em;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+</style>
+    
+<div class="login">
+    Hello, {{ .Username }} | <a href="/">Index</a>
+</div>
+      
+<h2>Your devices:</h2>
+<p>
+    <table class="devices">
+        <tr>
+            <th>MAC Address</th>
+            <th>Hostname</th>
+            <th>Actions</th>
+        </tr>
+        {{ range .Devices }}
+        <tr>
+            <td>{{ .MACAddress }}</td>
+            <td>{{ .Hostname }}</td>
+            <td><a href="/unclaim/{{ .MACAddress }}">Unclaim</a></td>
+        </tr>
+        {{ else }}
+        <tr>
+            <td colspan="3"><i>No devices...</i></td>
+        </tr>
+        {{ end }}
+    </table>
+</p>
+
+<hr>
+<a href="/claim">Claim this device!</a>
